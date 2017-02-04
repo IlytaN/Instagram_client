@@ -1,0 +1,60 @@
+/* Empty. Add your own CSS if you like */
+.home-title{
+
+}
+ion-tabs.tabs-color-active-dark .tab-item{
+  color: rgb(151, 152, 153);
+}
+.icon
+{
+  font-size: 28px;
+  padding: 8px;
+}
+.post-like{
+  font-weight: bold;
+}
+.user-nickname{
+  font-weight: bold;
+}
+.view-comments{
+  color: rgb(115, 115, 114) !important;
+}
+.post-time{
+  font-size: 11px !important;
+  color: rgb(115, 115, 114) !important;
+}
+.comment-text{
+  color: black !important;
+}
+.profile-info{
+  height: 5em !important;
+
+}
+.tabs-top >.tabs{
+  top: 0px !important;
+}
+
+.no-max-width{
+  max-width: none !important;
+}
+.edit-profile-button{
+  padding: 0 50px;
+}
+.bold-number{
+  font-weight: bold;
+  padding-left: 11px;
+}
+/*.profile-avatar{
+  position: static !important;
+}*/
+.center-align{
+  text-align: center;
+}
+.profile-border{
+  border-top-width: thin;
+  border-top-style: solid;
+  border-top-color: lightgray;
+  border-bottom-width: thin;
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+}
