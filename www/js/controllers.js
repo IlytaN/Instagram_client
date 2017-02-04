@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
       }
     }
     $scope.click_like = function() {
-      
+
     }
   })
 
@@ -23,7 +23,34 @@ angular.module('starter.controllers', [])
         }
     }
   })
-  .controller('TakepictureCtrl', function($scope) {})
+  .controller('TakepictureCtrl', function($scope) {
+    $scope.tabs = {
+        gallery: true,
+        photo: false
+    }
+
+    $scope.goBack = function()
+    {
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
+        $state.go('tab.home');
+    }
+
+    $scope.photo = function()
+    {
+        $scope.tabs.photo = true;
+        $scope.tabs.gallery = false;
+        // activate camera
+    }
+
+    $scope.gallery = function()
+    {
+        $scope.tabs.photo = false;
+        $scope.tabs.gallery = true;
+        // fetch photos
+    }
+  })
   .controller('HeartCtrl', function($scope) {})
       .controller('HeartFollowingCtrl', function($scope) {})
       .controller('HeartYouCtrl', function($scope) {})

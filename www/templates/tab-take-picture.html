@@ -1,14 +1,40 @@
-<ion-view view-title="take-picture">
-  <ion-tabs class="tabs-striped tabs-top tabs-background-stable">
+<ion-view cache-view="false">
+<ion-header-bar align-title="left" >
+    <div class="buttons" >
+        <button class="button button-icon ion-ios-close-empty" ng-click="goBack()">   Photo</button>
+    </div>
+    <h1 class="title"></h1>
+    <div class="buttons">
+        <button class="button button-clear button-calm" ng-click="confirmPost()">Next</button>
+    </div>
+</ion-header-bar>
 
-          <ion-tab title="gallery" ui-sref="#">
 
-          </ion-tab>
+  <ion-content class="padding">
+    <div ng-if="tabs.gallery">
+      <button class="button button-full button-calm" ng-click="choosePhoto()">
+          Choose Photo
+      </button>
+    </div>
 
-          <ion-tab title="photo" ui-sref="#">
+    <div ng-if="tabs.photo">
+      <button class="button button-full button-calm" ng-click="takePhoto()">
+          Take Photo
+      </button>
+    </div>
+    <center>
+      <h1>hehe</h1>
+    </center>
 
-          </ion-tab>
 
-  </ion-tabs>
-  <ui-view name="tab-take-picture"></ui-view>
+  </ion-content>
+
+  <div class="tabs tabs-light">
+    <a class="tab-item" ng-class="{active: tabs.gallery == true }" ng-click="gallery()">
+        Gallery
+    </a>
+    <a class="tab-item" ng-class="{active: tabs.photo == true }" ng-click="photo()">
+        Photo
+    </a>
+  </div>
 </ion-view>
