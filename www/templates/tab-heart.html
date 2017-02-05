@@ -1,26 +1,32 @@
-<ion-view title="Heart">
-<ion-tabs class="tabs-striped tabs-top tabs-background-stable go-top">
-
-        <ion-tab title="following" ui-sref="tab.heart.following">
-
-        </ion-tab>
-
-        <ion-tab title="you" ui-sref="tab.heart.you">
-
-        </ion-tab>
-
-</ion-tabs>
-<ui-view name="heart-page"></ui-view>
+<ion-view>
+  <ion-header-bar>
+        <!-- ng-class: if the expression is true, the class "active" is applied; otherwise it is not applied
+              the function in ng-click returns values that make the ng-class expression true/false-->
+      <div class="tab-item no-max-width" ng-class="{active: tabs.following == true }" ng-click="following()">
+        <h4>FOLLOWING</h4>
+      </div>
+      <div class="tab-item no-max-width" ng-class="{active: tabs.you == true }" ng-click="you()">
+        <h4>YOU</h4>
+      </div>
+  </ion-header-bar>
+  <ion-content>
+    <!-- ng-if: if the expression is false => remove the element -->
+    <div ng-if="tabs.following" ng-init="followingPosts()">
+      <div class="item item-avatar" ng-repeat="followingpost in followingposts">
+        <img ng-src="{{followingposts[$index].avatar}}"/>
+        <p><span class="user-nickname">{{followingpost.liker}}</span> liked
+           <span class="user-nickname">{{followingpost.username}}</span>'s photo.
+        </p>
+      </div>
+    </div>
+    <div ng-if="tabs.you" ng-init="youPosts()">
+      <div class="item item-avatar" ng-repeat="youpost in youposts">
+        <img ng-src="{{youposts[$index].avatar}}"/>
+        <p>
+          <span class="user-nickname">{{youpost.liker}}</span> liked
+          <span class="user-nickname">{{youpost.username}}</span>'s photo.
+        </p>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>
-<!-- 2nd way of making subtabs -->
-<!-- <div class="tabs-striped tabs-top tabs-background-stable">
-  <div class="tabs">
-    <a class="tab-item" ui-sref="tab.heart.following">
-      following
-    </a>
-    <a class="tab-item" ui-sref="tab.heart.you">
-      you
-    </a>
-  </div>
-</div>
-<ui-view name="heart-page"></ui-view> -->

@@ -77,26 +77,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
-          //These are subtabs of tab-heart
-            .state('tab.heart.following', {
-                url: '/following',
-                views: {
-                  'heart-page': {
-                    templateUrl: 'templates/heart-subtabs/heart-following.html',
-                    controller: 'HeartFollowingCtrl'
-                  }
-                }
-              })
-
-              .state('tab.heart.you', {
-                  url: '/you',
-                  views: {
-                    'heart-page': {
-                      templateUrl: 'templates/heart-subtabs/heart-you.html',
-                      controller: 'HeartYouCtrl'
-                    }
-                  }
-                })
 
     .state('tab.profile', {
         url: '/profile',
@@ -107,24 +87,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           }
         }
       })
-      //These are subtabs of tab-heart
-        .state('tab.profile.grid', {
-            url: '/grid',
-            views: {
-              'grid-page': {
-                templateUrl: 'templates/profile-grid.html'
-              }
-            }
-          })
-
-          .state('tab.profile.list', {
-              url: '/list',
-              views: {
-                'list-page': {
-                  templateUrl: 'templates/profile-list.html'
-                }
-              }
-            })
   ;
 
   // if none of the above states are matched, use this as the fallback
