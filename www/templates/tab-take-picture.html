@@ -10,20 +10,31 @@
 </ion-header-bar>
 
   <ion-content class="padding">
+
     <div ng-if="tabs.gallery">
-      <button class="button button-full button-calm" ng-click="choosePhoto()">
+      <button class="button button-full button-calm" ng-click="gallery()">
           Choose Photo
       </button>
+      <div>
+          {{ uploadResults }}
+      </div>
     </div>
 
     <div ng-if="tabs.photo">
-      <button class="button button-full button-calm" ng-click="takePhoto()">
-          Take Photo
-      </button>
+      <div>
+          Picture uri:<br>
+          {{ picture }}
+          <div>
+            <img ng-src="{{picture}}" style="max-width: 100%">
+          </div>
+      </div>
     </div>
-    <center>
-      <h1>hehe</h1>
-    </center>
+
+    <button class="button button-balanced" ng-click="testConnection()">
+          Test server connection
+    </button>
+    <div>{{ serverConnection }}</div>
+
   </ion-content>
 
   <div class="tabs tabs-light">

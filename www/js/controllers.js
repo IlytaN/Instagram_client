@@ -23,7 +23,8 @@ angular.module('starter.controllers', [])
         }
     }
   })
-  .controller('TakepictureCtrl', function($scope,$ionicHistory,$state) {
+  .controller('TakepictureCtrl', function($scope,$ionicHistory,$state,$ionicPlatform,
+                                          $cordovaFileTransfer, $cordovaCamera, $http) {
     $scope.tabs = {
         gallery: true,
         photo: false
@@ -42,14 +43,71 @@ angular.module('starter.controllers', [])
         $scope.tabs.photo = true;
         $scope.tabs.gallery = false;
         // activate camera
+        var options =  {
+            quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.CAMERA, //show camera
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE
+        };
+
+        $ionicPlatform.ready(function() {
+            $cordovaCamera.getPicture(options).then(function(imageData) {
+                $scope.picture = imageData;
+            }, function(err) {
+                  // error
+            });
+        });
     }
 
     $scope.gallery = function()
     {
         $scope.tabs.photo = false;
         $scope.tabs.gallery = true;
+        var options =  {
+            quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY, //show library
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE
+        };
+
+        $ionicPlatform.ready(function() {
+            $cordovaCamera.getPicture(options).then(function(imageData) {
+                $scope.picture = imageData;
+            }, function(err) {
+                  // error
+            });
+        });
         // fetch photos
+        // var options = new FileUploadOptions()
+        // options.fileKey = "image";
+        //                           // below URL needs to be edited
+        // $cordovaFileTransfer.upload('http://image-upload-example-server.herokuapp.com/upload', $scope.picture, options).then(function(result) {
+        //     console.log("File upload complete");
+        //     console.log(result);
+        //     $scope.uploadResults = "Upload completed successfully"
+        // }, function(err) {
+        //     console.log("File upload error");
+        //     console.log(err);
+        //     $scope.uploadResults = "Upload failed"
+        // }, function (progress) {
+        //     // constant progress updates
+        //     console.log(progress);
+        // });
     }
+
+    $scope.testConnection = function()
+    {           // below URL needs to be edited
+        // $http.get('http://image-upload-example-server.herokuapp.com/').then(function(result){
+        //     $scope.serverConnection = "Connection OK";
+        // },
+        // function(err){
+        //     $scope.serverConnection = "Connection fail";
+        // });
+
+    }
+
   })
   .controller('HeartCtrl', function($scope) {
     $scope.tabs = {
