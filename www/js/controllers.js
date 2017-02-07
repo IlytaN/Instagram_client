@@ -48,7 +48,8 @@ angular.module('starter.controllers', [])
             destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.CAMERA, //show camera
             encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE
+            mediaType: Camera.MediaType.PICTURE,
+            saveToPhotoAlbum: true
         };
 
         $ionicPlatform.ready(function() {
