@@ -1,27 +1,31 @@
 angular.module('starter.controllers', [])
 
-  .controller('HomeCtrl', function($scope) {
-    $scope.posts = [];
-    $scope.loadPosts = function(){
-      for(var i = 0; i < 100; i++) {
-          $scope.posts.push({id: i, avatar: "img/adam.jpg", username: "Adam Levin",
-          picture: "img/adam.jpg", like : 100, commenter: "Ben",
-          comment: "You are handsome!!!", number_of_comment: 100,
-        time_of_comment: 10});
-      }
-    }
-    $scope.click_like = function($scope) {
-
+  .controller('HomeCtrl', function($scope,PostsService) {
+    // $scope.posts = [];
+    // $scope.loadPosts = function(){
+    //   for(var i = 0; i < 100; i++) {
+    //       $scope.posts.push({id: i, avatar: "img/adam.jpg", username: "Adam Levin",
+    //       picture: "img/adam.jpg", like : 100, commenter: "Ben",
+    //       comment: "You are handsome!!!", number_of_comment: 100,
+    //     time_of_comment: 10});
+    //   }
+    // }
+    $scope.theposts = PostsService.all();
+    $scope.click_like = function(post_id) {
+      var theposts = PostsService.all();
+        theposts[post_id].like += 1;
+        console.log(theposts[post_id].like);
+        liked = true;
     }
   })
 
-  .controller('SearchCtrl', function($scope) {
-    $scope.images = [];
-    $scope.loadImages = function() {
-        for(var i = 0; i < 100; i++) {
-            $scope.images.push({id: i, src: "img/adam.jpg"});
-        }
-    }
+  .controller('SearchCtrl', function($scope,PostsService) {
+    $scope.theposts = PostsService.all();
+    // $scope.loadImages = function() {
+    //     for(var i = 0; i < 100; i++) {
+    //         $scope.images.push({id: i, src: "img/adam.jpg"});
+    //     }
+    // }
   })
   .controller('TakepictureCtrl', function($scope,$ionicHistory,$state,$ionicPlatform,
                                           $cordovaFileTransfer, $cordovaCamera, $http) {
@@ -100,12 +104,12 @@ angular.module('starter.controllers', [])
 
     $scope.testConnection = function()
     {           // below URL needs to be edited
-        // $http.get('http://image-upload-example-server.herokuapp.com/').then(function(result){
-        //     $scope.serverConnection = "Connection OK";
-        // },
-        // function(err){
-        //     $scope.serverConnection = "Connection fail";
-        // });
+        $http.get('https://boiling-coast-85665.herokuapp.com/').then(function(result){
+            $scope.serverConnection = "Connection OK";
+        },
+        function(err){
+            $scope.serverConnection = "Connection fail";
+        });
 
     }
 

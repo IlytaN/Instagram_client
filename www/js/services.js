@@ -1,50 +1,123 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
+.factory('PostsService', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  var chats = [{
+  var posts = [{
     id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
+    avatar: "img/adam.jpg",
+    username: "Adam Levin",
+    picture: "img/adam.jpg",
+    like : 100,
+    commenter: "Ben",
+    comment: "You are handsome!!!",
+    number_of_comment: 100,
+    time_of_comment: 10
   }, {
     id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
+    avatar: "img/adam.jpg",
+    username: "Adam Levin",
+    picture: "img/adam.jpg",
+    like : 30,
+    commenter: "Ben",
+    comment: "You are ugly!!!",
+    number_of_comment: 50,
+    time_of_comment: 4
   }, {
     id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
+    avatar: "img/trump.jpg",
+    username: "Trump",
+    picture: "img/trump.jpg",
+    like : 65,
+    commenter: "Hillary",
+    comment: "speechless!!!",
+    number_of_comment: 90,
+    time_of_comment: 5
   }, {
     id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
+    avatar: "img/adam.jpg",
+    username: "Obama",
+    picture: "img/adam.jpg",
+    like : 100000,
+    commenter: "Ben",
+    comment: "You are handsome!!!",
+    number_of_comment: 80,
+    time_of_comment: 3
   }, {
     id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
+    avatar: "img/adam.jpg",
+    username: "Katy Perry",
+    picture: "img/adam.jpg",
+    like : 77,
+    commenter: "Ben",
+    comment: "You are handsome!!!",
+    number_of_comment: 99,
+    time_of_comment: 8
+  }, {
+    id: 5,
+    avatar: "img/adam.jpg",
+    username: "Adam Levin",
+    picture: "img/adam.jpg",
+    like : 100,
+    commenter: "Ben",
+    comment: "You are handsome!!!",
+    number_of_comment: 100,
+    time_of_comment: 10
+  }, {
+    id: 6,
+    avatar: "img/adam.jpg",
+    username: "Adam Levin",
+    picture: "img/adam.jpg",
+    like : 30,
+    commenter: "Ben",
+    comment: "You are ugly!!!",
+    number_of_comment: 50,
+    time_of_comment: 4
+  }, {
+    id: 7,
+    avatar: "img/trump.jpg",
+    username: "Trump",
+    picture: "img/trump.jpg",
+    like : 65,
+    commenter: "Hillary",
+    comment: "speechless!!!",
+    number_of_comment: 90,
+    time_of_comment: 5
+  }, {
+    id: 8,
+    avatar: "img/adam.jpg",
+    username: "Obama",
+    picture: "img/adam.jpg",
+    like : 100000,
+    commenter: "Ben",
+    comment: "You are handsome!!!",
+    number_of_comment: 80,
+    time_of_comment: 3
+  }, {
+    id: 9,
+    avatar: "img/adam.jpg",
+    username: "Katy Perry",
+    picture: "img/adam.jpg",
+    like : 77,
+    commenter: "Ben",
+    comment: "You are handsome!!!",
+    number_of_comment: 99,
+    time_of_comment: 8
+}];
 
   return {
     all: function() {
-      return chats;
+      return posts;
     },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
+    singleuser: function(id){
+      for(i=0;i<posts.length;i++){
+				if(users[i].id == id){
+					return posts[i];
+				}}
     },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
-        }
-      }
-      return null;
+    showpictures: function(){
+      return posts[picture];
     }
   };
 });
