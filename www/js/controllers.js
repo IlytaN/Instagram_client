@@ -1,34 +1,53 @@
 angular.module('starter.controllers', [])
 
-  .controller('HomeCtrl', function($scope,PostsService) {
-    // $scope.posts = [];
-    // $scope.loadPosts = function(){
-    //   for(var i = 0; i < 100; i++) {
-    //       $scope.posts.push({id: i, avatar: "img/adam.jpg", username: "Adam Levin",
-    //       picture: "img/adam.jpg", like : 100, commenter: "Ben",
-    //       comment: "You are handsome!!!", number_of_comment: 100,
-    //     time_of_comment: 10});
-    //   }
-    // }
-    $scope.theposts = PostsService.all();
+  .controller('HomeCtrl', function($scope,PostsService,$state) {
+    //this can load data from server :)))))
+    $scope.$on('$ionicView.enter', function(){
+      PostsService.all().then(function(data)
+           {
+             $scope.theposts = data;
+           }
+      );
+    });
+
+    PostsService.showlocalpost().then(function(data)
+         {
+           $scope.localposts = data;
+         }
+    );
+
     $scope.click_like = function(post_id) {
-      var theposts = PostsService.all();
-        theposts[post_id].like += 1;
-        console.log(theposts[post_id].like);
-        liked = true;
+        console.log(post_id);
+        PostsService.solveLike(post_id);
     }
+
+    $scope.click_comment = function(post_id) {
+        console.log(post_id);
+        $state.go('comment',{ post_id: post_id}, null, {reload:true});
+    }
+
+  })
+
+  .controller('CommentCtrl', function($scope,PostsService,$ionicHistory, $state) {
+        $scope.confirm_comment = function(post_id) {
+            console.log(post_id);
+            PostsService.solveComment(post_id);
+          }
+        $scope.goBack = function()
+          {
+              $ionicHistory.nextViewOptions({
+                  disableBack: true
+              });
+              $state.go('tab.home');
+          }
   })
 
   .controller('SearchCtrl', function($scope,PostsService) {
-    $scope.theposts = PostsService.all();
-    // $scope.loadImages = function() {
-    //     for(var i = 0; i < 100; i++) {
-    //         $scope.images.push({id: i, src: "img/adam.jpg"});
-    //     }
-    // }
+    $scope.theposts = PostsService.returnallpost();
   })
-  .controller('TakepictureCtrl', function($scope,$ionicHistory,$state,$ionicPlatform,
+  .controller('TakepictureCtrl', function($scope,$rootScope,$ionicHistory,$state,$ionicPlatform,
                                           $cordovaFileTransfer, $cordovaCamera, $http) {
+
     $scope.tabs = {
         gallery: true,
         photo: false
@@ -58,7 +77,7 @@ angular.module('starter.controllers', [])
 
         $ionicPlatform.ready(function() {
             $cordovaCamera.getPicture(options).then(function(imageData) {
-                $scope.picture = imageData;
+                $rootScope.picture = imageData;
             }, function(err) {
                   // error
             });
@@ -79,41 +98,65 @@ angular.module('starter.controllers', [])
 
         $ionicPlatform.ready(function() {
             $cordovaCamera.getPicture(options).then(function(imageData) {
-                $scope.picture = imageData;
+                $rootScope.picture = imageData;
             }, function(err) {
                   // error
             });
         });
-        // fetch photos
-        // var options = new FileUploadOptions()
-        // options.fileKey = "image";
-        //                           // below URL needs to be edited
-        // $cordovaFileTransfer.upload('http://image-upload-example-server.herokuapp.com/upload', $scope.picture, options).then(function(result) {
-        //     console.log("File upload complete");
-        //     console.log(result);
-        //     $scope.uploadResults = "Upload completed successfully"
-        // }, function(err) {
-        //     console.log("File upload error");
-        //     console.log(err);
-        //     $scope.uploadResults = "Upload failed"
-        // }, function (progress) {
-        //     // constant progress updates
-        //     console.log(progress);
-        // });
     }
-
-    $scope.testConnection = function()
-    {           // below URL needs to be edited
-        $http.get('https://boiling-coast-85665.herokuapp.com/').then(function(result){
-            $scope.serverConnection = "Connection OK";
-        },
-        function(err){
-            $scope.serverConnection = "Connection fail";
-        });
-
+    $scope.confirmPost = function() {
+      $state.go('addpost');
     }
 
   })
+
+  .controller('AddpostCtrl',function($scope,$rootScope,$ionicHistory,$state,PostsService){
+    $scope.goBack = function()
+    {
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
+        $state.go('take-picture');
+    }
+    $scope.tabs = {
+        followers: true,
+        direct: false
+    }
+
+    $scope.direct = function()
+    {
+        $scope.tabs.direct = true;
+        $scope.tabs.followers = false;
+        // activate camera
+    }
+
+    $scope.followers = function()
+    {
+        $scope.tabs.direct = false;
+        $scope.tabs.followers = true;
+        // fetch photos
+    }
+
+    $scope.newpost = {
+        imageData: $rootScope.picture,
+        caption: ""
+    }
+    console.log($scope.newpost.imageData);
+
+    $scope.Share = function()
+    {
+
+          PostsService.AddNewPost($scope.newpost.imageData, $scope.newpost.caption).then(function(){
+              $ionicHistory.nextViewOptions({
+                  disableBack: true
+              });
+              $state.go('tab.home',null);
+          });
+          console.log($scope.newpost.imageData);
+    };
+
+  })
+
   .controller('HeartCtrl', function($scope) {
     $scope.tabs = {
         following: true,

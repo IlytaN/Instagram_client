@@ -1,0 +1,49 @@
+<ion-view cache-view="false">
+<ion-header-bar align-title="left" >
+  <div>
+    <div class="buttons" >
+        <button class="button button-icon ion-ios-close-empty" ng-click="goBack()">Share to</button>
+    </div>
+    <h1 class="title"></h1>
+    <div class="buttons">
+        <button class="button button-clear button-calm" ng-click="Share()">Share</button>
+    </div>
+  </div>
+  <div class="tabs tabs-top">
+      <div class="tab-item no-max-width" ng-class="{active: tabs.followers == true }" ng-click="followers()">
+        <h4>FOLLOWERS</h4>
+      </div>
+      <div class="tab-item no-max-width" ng-class="{active: tabs.direct == true }" ng-click="direct()">
+        <h4>DIRECT</h4>
+      </div>
+    </div>
+</ion-header-bar>
+
+  <ion-content class="change-top">
+    <div ng-if="tabs.followers">
+      <div class="list card">
+
+        <div class="item">
+          
+          <img ng-src="{{picture}}" class="square-img">
+          <input class="go-right" type="text" placeholder="Write a caption..." ng-model="newpost.caption">
+        </div>
+        <a href="#" class="item item-icon-left">
+          <i class="icon ion-location"></i>
+          Add location
+        </a>
+
+        <a href="#" class="item item-icon-left">
+          <i class="icon ion-android-people"></i>
+          Tag people
+        </a>
+
+      </div>
+    </div>
+
+    <div ng-if="tabs.direct">
+    </div>
+
+
+  </ion-content>
+</ion-view>

@@ -63,3 +63,18 @@ ion-tabs.tabs-color-active-dark .tab-item{
   padding-left: 2.7em;
   max-width: 33%;
 }
+.change-top{
+  top: 70px !important;
+}
+.square-img{
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    max-width: 40px;
+    max-height: 40px;
+    width: 100%;
+    height: 100%;
+}
+.go-right{
+  padding-left: 50px !important;
+}

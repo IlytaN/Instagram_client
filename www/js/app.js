@@ -51,6 +51,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('comment', {
+    url: '/comment',
+    templateUrl: 'templates/comment.html',
+    controller: 'CommentCtrl'
+  })
+
   .state('tab.search', {
       url: '/search',
       views: {
@@ -66,6 +72,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/take-picture',
     templateUrl: 'templates/tab-take-picture.html',
     controller: 'TakepictureCtrl'
+  })
+
+  .state('addpost', {
+    url: '/addpost',
+    templateUrl: 'templates/addpost.html',
+    controller: 'AddpostCtrl'
   })
 
   .state('tab.heart', {

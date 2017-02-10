@@ -1,10 +1,11 @@
-<ion-view>
+<ion-view cache-view="false">
   <div class="bar bar-header bar-stable">
 
     <i class="icon ion-android-camera"></i>
     <h1 class="title">Instagram</h1>
   </div>
   <ion-content class="has-header">
+    <!-- This is data from server. Like and comment cannot work here. Please scroll down and try with local data -->
     <div class="list" ng-repeat="post in theposts">
 
       <div class="item item-avatar">
@@ -17,6 +18,39 @@
         <p>
           <i class="icon ion-android-favorite-outline" ng-click="click_like($index)"></i>
           <i class="icon ion-android-chat"></i>
+          <i class="icon ion-android-send"></i>
+        </p>
+        <p class="post-like">
+          <i class="ion-android-favorite"></i>
+          {{post.like}} likes
+        </p>
+        <p>
+          <span class="user-nickname">{{post.commenter}}</span>
+          <span class="comment-text"> {{post.comment}}</span>
+        </p>
+        <p class="view-comments">
+          View all {{post.number_of_comment}} comments
+        </p>
+        <p class="post-time">
+          {{post.time_of_comment}} HOURS ago
+        </p>
+      </div>
+
+    </div>
+
+    <!-- This is local data, you can like and comment here -->
+    <div class="list" ng-repeat="post in localposts">
+
+      <div class="item item-avatar">
+        <img ng-src="{{localposts[$index].avatar}}">
+        <h2>{{post.username}}</h2>
+      </div>
+      <img class="full-image" ng-src="{{localposts[$index].picture}}">
+      <div class="padding">
+
+        <p>
+          <i class="icon ion-android-favorite-outline" ng-click="click_like($index)"></i>
+          <i class="icon ion-android-chat" ng-click="click_comment($index)"></i>
           <i class="icon ion-android-send"></i>
         </p>
         <p class="post-like">

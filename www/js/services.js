@@ -1,123 +1,96 @@
 angular.module('starter.services', [])
 
-.factory('PostsService', function() {
-  // Might use a resource here that returns a JSON array
+.factory('PostsService', function($q,$http) {
 
-  // Some fake testing data
-  var posts = [{
+  // This is data for local use; it is similar to the data in the server
+  var posts_local = [{
     id: 0,
     avatar: "img/adam.jpg",
     username: "Adam Levin",
     picture: "img/adam.jpg",
     like : 100,
+    liked: false,
+    caption: [],
     commenter: "Ben",
     comment: "You are handsome!!!",
     number_of_comment: 100,
     time_of_comment: 10
-  }, {
-    id: 1,
-    avatar: "img/adam.jpg",
-    username: "Adam Levin",
-    picture: "img/adam.jpg",
-    like : 30,
-    commenter: "Ben",
-    comment: "You are ugly!!!",
-    number_of_comment: 50,
-    time_of_comment: 4
-  }, {
-    id: 2,
-    avatar: "img/trump.jpg",
-    username: "Trump",
-    picture: "img/trump.jpg",
-    like : 65,
-    commenter: "Hillary",
-    comment: "speechless!!!",
-    number_of_comment: 90,
-    time_of_comment: 5
-  }, {
-    id: 3,
-    avatar: "img/adam.jpg",
-    username: "Obama",
-    picture: "img/adam.jpg",
-    like : 100000,
-    commenter: "Ben",
-    comment: "You are handsome!!!",
-    number_of_comment: 80,
-    time_of_comment: 3
-  }, {
-    id: 4,
-    avatar: "img/adam.jpg",
-    username: "Katy Perry",
-    picture: "img/adam.jpg",
-    like : 77,
-    commenter: "Ben",
-    comment: "You are handsome!!!",
-    number_of_comment: 99,
-    time_of_comment: 8
-  }, {
-    id: 5,
-    avatar: "img/adam.jpg",
-    username: "Adam Levin",
-    picture: "img/adam.jpg",
-    like : 100,
-    commenter: "Ben",
-    comment: "You are handsome!!!",
-    number_of_comment: 100,
-    time_of_comment: 10
-  }, {
-    id: 6,
-    avatar: "img/adam.jpg",
-    username: "Adam Levin",
-    picture: "img/adam.jpg",
-    like : 30,
-    commenter: "Ben",
-    comment: "You are ugly!!!",
-    number_of_comment: 50,
-    time_of_comment: 4
-  }, {
-    id: 7,
-    avatar: "img/trump.jpg",
-    username: "Trump",
-    picture: "img/trump.jpg",
-    like : 65,
-    commenter: "Hillary",
-    comment: "speechless!!!",
-    number_of_comment: 90,
-    time_of_comment: 5
-  }, {
-    id: 8,
-    avatar: "img/adam.jpg",
-    username: "Obama",
-    picture: "img/adam.jpg",
-    like : 100000,
-    commenter: "Ben",
-    comment: "You are handsome!!!",
-    number_of_comment: 80,
-    time_of_comment: 3
-  }, {
-    id: 9,
-    avatar: "img/adam.jpg",
-    username: "Katy Perry",
-    picture: "img/adam.jpg",
-    like : 77,
-    commenter: "Ben",
-    comment: "You are handsome!!!",
-    number_of_comment: 99,
-    time_of_comment: 8
-}];
+  },{
+   id: 1,
+   avatar: "img/max.png",
+   username: "Max",
+   picture: "img/max.png",
+   like : 65,
+   liked: false,
+   caption: [],
+   commenter: "Hillary",
+   comment: "speechless!!!",
+   number_of_comment: 90,
+   time_of_comment: 5
+ }];
 
+  var posts = [];
   return {
     all: function() {
-      return posts;
+      return $q(function(resolve, reject){
+          $http.get("https://boiling-coast-85665.herokuapp.com/posts").then(function(response){
+              posts = response.data;
+              console.log(posts);
+              resolve(posts);
+          },function(err){
+                  reject();
+          });
+      });
     },
-    singleuser: function(id){
-      for(i=0;i<posts.length;i++){
-				if(users[i].id == id){
-					return posts[i];
-				}}
+    showlocalpost: function(){
+
+      return $q(function(resolve, reject){
+        resolve(posts_local);
+      });
     },
-    showpictures: function(){
-      return posts[picture];
+    returnallpost: function(){
+
+      return posts_local;
+    },
+    showsinglelocalpost: function(id_post){
+      return posts_local[id_post];
+    },
+    solveLike: function(id_post){
+      if(posts_local[id_post].liked)
+            {
+              posts_local[id_post].like+=1;
+              posts_local[id_post].liked=true;
+            }
+            else
+            {
+              posts_local[id_post].like-=1;
+              posts_local[id_post].liked=false;
+            }
+            posts_local[id_post].liked = !posts_local[id_post].liked;
+    },
+    solveComment: function(id_post){
+
+    },
+    AddNewPost: function (imageUri,caption) {
+      return $q(function(resolve, reject) {
+
+        var newPost = {
+          id: 10,
+          avatar: "img/max.png",
+          username: "Max",
+          picture: imageUri,
+          caption: caption,
+          like: 0,
+          liked: false,
+          commenter: [],
+          comment: [],
+          number_of_comment: 0,
+          time_of_comment: 0
+        };
+
+        posts_local.unshift(newPost);
+        resolve();
+      });
     }
   };
 });

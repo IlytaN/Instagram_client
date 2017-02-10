@@ -1,0 +1,67 @@
+API design
+-------------
+GET/posts
+	Access this route, the application can get data about the public posts such as picture, username, avatar, comments, commenter, 
+	number of like andd number of comments etc.
+
+	Parameter:
+		  id 			This helps identify post
+		  user
+		    ->user_id		user_id
+		    ->avatar		post owner's avatar
+		    ->username		user's name
+		  picture		Main content of the post
+		  caption		Post's caption
+		  like			number of like
+		  liked			to know if "like" has been clicked or not (true/false)
+		  comments		the comments of the post
+		   ->comment_id	   	comment's id
+		   ->user	
+		    	->user_id	user_id
+		    	->avatar	post owner's avatar
+		    	->username	user's name	
+		   ->text		comment's text
+	
+	
+	Example request:
+		posts = [        
+			{
+            			id: 0,
+            			user: {
+                			user_id: 2,
+                			username: "Trump",
+                			avatar: "http://core0.staticworld.net/images/article/2015/11/111915blog-donald-trump-100629006-primary.idge.jpg" 
+            				},                                                 
+            			picture: "http://media1.fdncms.com/sacurrent/imager/u/original/2513252/donald_trump4.jpg",
+				caption: "I'm the king of the world",
+            			like: 100000,
+				liked: false,        
+            			comments: [{
+                        		 comment_id: 3,
+            			user: {
+                			user_id: 3,
+                			username: "Obama",
+                			avatar: "http://core0.staticworld.net/images/article/2015/11/111915blog-donald-trump-100629006-primary.idge.jpg" 
+            				}
+                        		text: "No way!!!",
+                    			}]
+
+        			}
+			]
+-----------------------
+GET/posts/id
+	Access a single post
+	Parameter is the same with GET/posts
+----------------------
+POST/posts
+	Access this route, the application can send information about the post to server
+	Parameter is the same with GET/posts
+-------------------
+PUT/posts
+	Access this route, the application can update information about the post.
+	Parameter is the same with GET/posts
+--------------------
+DELETE/posts
+	Access this route, the application can delete post.
+	Parameter is the same with GET/posts
+		
