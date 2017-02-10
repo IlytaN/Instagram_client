@@ -24,30 +24,30 @@ GET/posts
 	
 	
 	Example request:
-		posts = [        
+		{"posts":        
 			{
-            			id: 0,
-            			user: {
-                			user_id: 2,
-                			username: "Trump",
-                			avatar: "http://core0.staticworld.net/images/article/2015/11/111915blog-donald-trump-100629006-primary.idge.jpg" 
+            			"id": 0,
+            			"user": {
+                			"user_id": 2,
+                			"username": "Trump",
+                			"avatar": "http://core0.staticworld.net/images/article/2015/11/111915blog-donald-trump-100629006-primary.idge.jpg" 
             				},                                                 
-            			picture: "http://media1.fdncms.com/sacurrent/imager/u/original/2513252/donald_trump4.jpg",
-				caption: "I'm the king of the world",
-            			like: 100000,
-				liked: false,        
-            			comments: [{
-                        		 comment_id: 3,
-            			user: {
-                			user_id: 3,
-                			username: "Obama",
-                			avatar: "http://core0.staticworld.net/images/article/2015/11/111915blog-donald-trump-100629006-primary.idge.jpg" 
-            				}
-                        		text: "No way!!!",
-                    			}]
+            			"picture": "http://media1.fdncms.com/sacurrent/imager/u/original/2513252/donald_trump4.jpg",
+				"caption": "I'm the king of the world",
+            			"like": 100000,
+				"liked": false,        
+            			"comments": {
+                        		 	"comment_id": 3,
+            					"user": {
+                					"user_id": 3,
+                					"username": "Obama",
+                					"avatar": "http://core0.staticworld.net/images/article/2015/11/111915blog-donald-trump-100629006-primary.idge.jpg" 
+            						},
+                        			"text": "No way!!!"
+                    			     }
 
-        			}
-			]
+        		}
+		}
 -----------------------
 GET/posts/id
 	Access a single post
