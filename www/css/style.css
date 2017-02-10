@@ -78,3 +78,20 @@ ion-tabs.tabs-color-active-dark .tab-item{
 .go-right{
   padding-left: 50px !important;
 }
+.login-header{
+  height: 10em;
+  background-color: blue;
+}
+.login-header >h1{
+  color: white;
+  text-align: center;
+  padding: 1.5em;
+}
+.has-login-header{
+  top: 10em !important;
+}
+.footer >h4{
+  margin-top: 80%;
+  text-align: center;
+  color: gray;
+}

@@ -1,5 +1,11 @@
 angular.module('starter.controllers', [])
 
+  .controller('LoginCtrl', function($scope,$state) {
+    $scope.goHome = function() {
+      $state.go('tab.home');
+    }
+  })
+
   .controller('HomeCtrl', function($scope,PostsService,$state) {
     //this can load data from server :)))))
     $scope.$on('$ionicView.enter', function(){
